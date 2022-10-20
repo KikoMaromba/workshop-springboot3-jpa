@@ -31,4 +31,16 @@ public class UserService {
 	public void delete(Long id) {
 		repository.deleteById(id);
 	}
+
+	public User update(long id, User obj) {
+		User entity = repository.getReferenceById(id); // getReferenceById tras o objeto monitorado para mexermos e só,
+		updateData(entity, obj);                       // depois feftuar uma operacao no banco de dados
+		return repository.save(entity);
+	}
+
+	private void updateData(User entity, User obj) {
+		entity.setName(obj.getName());
+		entity.setEmail(obj.getEmail());
+		entity.setPhone(obj.getPhone());
+	}
 }
